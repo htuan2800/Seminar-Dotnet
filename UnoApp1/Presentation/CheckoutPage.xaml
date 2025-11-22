@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="UnoApp1.Presentation.CheckoutPage"
+    x:Name="PageRoot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UnoApp1.Presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utu="using:Uno.Toolkit.UI"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <utu:NavigationBar Content="CheckOut" Grid.Row="0" />
+        <StackPanel Grid.Row="1" Padding="10" Spacing="15">
+            <TextBlock Text="Thông tin giao hàng" FontSize="20" FontWeight="Bold"/>
+
+            <TextBox Header="Họ và tên" Text="{Binding CustomerName, Mode=TwoWay}"/>
+            <TextBox Header="Số điện thoại" Text="{Binding PhoneNumber, Mode=TwoWay}"/>
+            <TextBox Header="Địa chỉ" Text="{Binding Address, Mode=TwoWay}"/>
+
+            <Button Content="XÁC NHẬN ĐẶT HÀNG" 
+            Command="{Binding PlaceOrderCommand}"
+            HorizontalAlignment="Stretch" 
+            Background="Red" Foreground="White"/>
+        </StackPanel>
+    </Grid>
+</Page>

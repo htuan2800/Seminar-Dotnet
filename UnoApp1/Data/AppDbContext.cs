@@ -13,6 +13,7 @@ internal class AppDbContext : DbContext
     [RequiresUnreferencedCode("")]
     public AppDbContext()
     {
+        //this.Database.EnsureDeleted();
         //nếu chưa có file .db thì nó TỰ TẠO.
         this.Database.EnsureCreated();
     }

@@ -1,5 +1,5 @@
 using Uno.Resizetizer;
-
+using UnoApp1.Services;
 namespace UnoApp1;
 public partial class App : Application
 {
@@ -74,6 +74,7 @@ public partial class App : Application
                 {
                     // TODO: Register your services
                     //services.AddSingleton<IMyService, MyService>();
+                    services.AddSingleton<ICartService, CartService>();
                 })
                 .UseNavigation(RegisterRoutes)
             );
@@ -92,6 +93,9 @@ public partial class App : Application
         views.Register(
             new ViewMap(ViewModel: typeof(ShellViewModel)),
             new ViewMap<MainPage, MainViewModel>(),
+            new ViewMap<ProductDetailPage, ProductDetailViewModel>(),
+            new ViewMap<CartPage, CartViewModel>(),
+            new ViewMap<CheckoutPage, CheckoutViewModel>(),
             new DataViewMap<SecondPage, SecondViewModel, Entity>()
         );
 
@@ -101,6 +105,9 @@ public partial class App : Application
                 [
                     new ("Main", View: views.FindByViewModel<MainViewModel>(), IsDefault:true),
                     new ("Second", View: views.FindByViewModel<SecondViewModel>()),
+                    new ("Cart", View: views.FindByViewModel<CartViewModel>()),
+                    new ("Checkout", View: views.FindByViewModel<CheckoutViewModel>()),
+                    new ("ProductDetail", View: views.FindByViewModel<ProductDetailViewModel>())
                 ]
             )
         );

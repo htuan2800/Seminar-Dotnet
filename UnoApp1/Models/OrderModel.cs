@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace UnoApp1.Models;
-internal class OrderModel
+public class OrderModel
 {
     public string CustomerName { get; set; }
     public string PhoneNumber { get; set; }

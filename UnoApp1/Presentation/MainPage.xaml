@@ -17,9 +17,24 @@
             <utu:NavigationBar.PrimaryCommands>
                 <AppBarButton Label="Giỏ hàng" 
                   Command="{Binding GoToCartCommand}">
-                    <AppBarButton.Icon>
+                    <Grid>
                         <SymbolIcon Symbol="Shop" />
-                    </AppBarButton.Icon>
+
+                        <Border Background="Red" 
+                CornerRadius="10" 
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Right" 
+                Margin="10,0,0,10"
+                MinWidth="16" Height="16"
+                Visibility="{Binding CartCount, Converter={StaticResource CountToVisibilityConverter}}">
+
+                            <TextBlock Text="{Binding CartCount}" 
+                       Foreground="White" 
+                       FontSize="10" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
                 </AppBarButton>
             </utu:NavigationBar.PrimaryCommands>
         </utu:NavigationBar>

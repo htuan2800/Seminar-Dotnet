@@ -10,4 +10,7 @@ public interface IApiProduct
 {
     [Get("/product")]
     Task<List<Product>> GetProductsAsync();
+
+    [Post("/orders")]
+    Task<OrderModel> CreateOrderAsync([Body] OrderModel order);
 }

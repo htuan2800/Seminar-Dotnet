@@ -11,15 +11,20 @@ public partial class MainViewModel : ObservableObject
 
     private IDispatcher _dispatcher;
 
+    private ICartService _cartService;
+
     // 1. Khai báo biến IsLoading (Bạn bị thiếu cái này)
     [ObservableProperty]
     private bool _isLoading;
+
+    [ObservableProperty]
+    private int _cartCount;
 
     // Danh sách sản phẩm
     [ObservableProperty]
     private ObservableCollection<Product> _products;
 
-    public MainViewModel(INavigator navigator, IDispatcher dispatcher)
+    public MainViewModel(INavigator navigator, IDispatcher dispatcher, ICartService cartService)
     {
         _navigator = navigator;
         _dispatcher = dispatcher;
@@ -30,6 +35,15 @@ public partial class MainViewModel : ObservableObject
         // 3. Gọi hàm tải dữ liệu (Fire-and-forget)
         // Vì Constructor không thể await, ta gọi hàm async mà không cần await ở đây
         LoadDataAsync();
+        _cartService = cartService;
+
+        UpdateBadge();
+    }
+
+
+    public async void UpdateBadge()
+    {
+        CartCount = await _cartService.GetCartCountAsync();
     }
 
     public string Title { get; }
@@ -83,14 +97,24 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private async Task GoToCartAsync()
     {
-        // await _navigator.NavigateViewModelAsync<CartViewModel>(this);
+         await _navigator.NavigateViewModelAsync<CartViewModel>(this);
     }
 
     // Lệnh mở trang Chi tiết
     [RelayCommand]
     private async Task GoToDetailAsync(Product selectedProduct)
     {
-        if (selectedProduct == null) return;
-        // await _navigator.NavigateViewModelAsync<ProductDetailViewModel>(this, data: selectedProduct);
+        if (selectedProduct == null)
+        {
+            Console.WriteLine("selectedProduct is NULL!");
+            return;
+        }
+
+        Console.WriteLine($"Đang chuyển: {selectedProduct.product_name}");
+
+        ProductDetailViewModel.TempProductPayload = selectedProduct;
+
+        // Navigate KHÔNG truyền data parameter
+        await _navigator.NavigateViewModelAsync<ProductDetailViewModel>(this);
     }
 }
