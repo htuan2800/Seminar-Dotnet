@@ -10,7 +10,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid utu:SafeArea.Insets="VisibleBounds">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -69,8 +69,8 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Border Grid.Row="2" Background="#F0F0F0" Padding="5">
-            <StackPanel>
+        <Border Grid.Row="2" Background="#F0F0F0">
+            <StackPanel Padding="20,20,20,40">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="Tổng cộng: " FontWeight="Bold" FontSize="18"/>
                     <TextBlock Text="{Binding TotalPrice}" FontWeight="Bold" FontSize="18" Foreground="Red"/>
@@ -80,7 +80,7 @@
                 <Button Content="TIẾN HÀNH ĐẶT HÀNG" 
                         Command="{Binding GoToCheckoutCommand}"
                         HorizontalAlignment="Stretch" 
-                        Margin="0,0,0,15"/>
+                        Margin="0,0,0,5"/>
             </StackPanel>
         </Border>
     </Grid>

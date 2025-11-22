@@ -12,7 +12,7 @@ public class Product
 
     public string unit { get; set; }
 
-    public long created_at { get; set; }
+    public DateTimeOffset created_at { get; set; }
 
     public decimal price { get; set; }
 

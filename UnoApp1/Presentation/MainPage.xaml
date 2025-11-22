@@ -40,20 +40,55 @@
         </utu:NavigationBar>
 
         <GridView Grid.Row="1" 
-                ItemsSource="{Binding Products}"
-                Padding="10">
+          ItemsSource="{Binding Products}"
+          Padding="10"
+          SelectionMode="None">
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                </Style>
+            </GridView.ItemContainerStyle>
+
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <Button Style="{StaticResource MaterialOutlinedButtonStyle}"
-                          Command="{Binding DataContext.GoToDetailCommand, ElementName=PageRoot}"
-                          CommandParameter="{Binding}"
-                          Margin="5" Padding="0">
+                    Command="{Binding DataContext.GoToDetailCommand, ElementName=PageRoot}"
+                    CommandParameter="{Binding}"
+                    Margin="5" Padding="0"
+                    CornerRadius="12"  
+                    BorderThickness="1"
+                    BorderBrush="#E0E0E0"
+                    Background="White">
+                        <Grid Width="150">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="160"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                        <StackPanel Width="150" Padding="10">
-                            <Image Source="{Binding imageUrl}" Height="120" Stretch="UniformToFill"/>
-                            <TextBlock Text="{Binding product_name}" FontWeight="Bold" TextWrapping="Wrap" MaxLines="2"/>
-                            <TextBlock Text="{Binding price}" Foreground="Red"/>
-                        </StackPanel>
+                            <Image Grid.Row="0" 
+                           Source="{Binding imageUrl}" 
+                           Stretch="Uniform" 
+                           Margin="10"/>
+
+                            <TextBlock Grid.Row="1" 
+                               Text="{Binding product_name}" 
+                               FontWeight="SemiBold" 
+                               FontSize="14"
+                               TextTrimming="CharacterEllipsis" 
+                               MaxLines="2" 
+                               Margin="10,0,10,5"
+                               Height="40"/>
+                            <TextBlock Grid.Row="2" 
+                               Foreground="#D32F2F" 
+                               FontWeight="Bold" 
+                               FontSize="16"
+                               Margin="10,0,10,15">
+                                    <Run Text="{Binding price}" />
+                                    <Run Text=" đ" FontSize="12"/>      
+                            </TextBlock>
+                        </Grid>
                     </Button>
                 </DataTemplate>
             </GridView.ItemTemplate>
