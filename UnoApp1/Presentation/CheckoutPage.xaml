@@ -21,9 +21,23 @@
         <StackPanel Grid.Row="1" Padding="10" Spacing="15">
             <TextBlock Text="Thông tin giao hàng" FontSize="20" FontWeight="Bold"/>
 
-            <TextBox Header="Họ và tên" Text="{Binding CustomerName, Mode=TwoWay}"/>
-            <TextBox Header="Số điện thoại" Text="{Binding PhoneNumber, Mode=TwoWay}"/>
-            <TextBox Header="Địa chỉ" Text="{Binding Address, Mode=TwoWay}"/>
+            <TextBox Header="Họ và tên" 
+             Text="{Binding CustomerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+             PlaceholderText="Ví dụ: Nguyễn Văn A"/>
+
+            <TextBox Header="Số điện thoại" 
+             Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+             InputScope="Number" 
+             PlaceholderText="Nhập 10 chữ số"/>
+
+            <TextBox Header="Địa chỉ" 
+             Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+             PlaceholderText="Số nhà, Đường, Quận..."/>
+
+            <TextBlock Text="{Binding ErrorMessage}" 
+               Foreground="Red" 
+               HorizontalAlignment="Center" 
+               Margin="0,10"/>
 
             <Button Content="XÁC NHẬN ĐẶT HÀNG" 
             Command="{Binding PlaceOrderCommand}"

@@ -1,19 +1,36 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
-using UnoApp1.Services;
 using Refit;
+using UnoApp1.Services;
 namespace UnoApp1.Presentation;
-public partial class CheckoutViewModel : ObservableObject
+public partial class CheckoutViewModel : ObservableValidator
 {
     private readonly ICartService _cartService;
     private readonly INavigator _navigator;
 
     // Form nhập liệu (Mục 3.4)
-    [ObservableProperty] private string _customerName;
-    [ObservableProperty] private string _address;
-    [ObservableProperty] private string _phoneNumber;
+    [ObservableProperty]
+    [Required(ErrorMessage = "Vui lòng nhập họ tên")]
+    private string _customerName;
 
+    [ObservableProperty]
+    private string _errorMessage;
+
+
+    [ObservableProperty]
+    [Required(ErrorMessage = "Vui lòng nhập địa chỉ")]
+    private string _address;
+
+    [ObservableProperty]
+    [Required(ErrorMessage = "Vui lòng nhập SĐT")]
+    [Phone(ErrorMessage = "SĐT không hợp lệ")] // Kiểm tra định dạng số điện thoại
+    [RegularExpression(@"^\d{10,}$", ErrorMessage = "SĐT phải là số và đủ 10 số trở lên")]
+    private string _phoneNumber;
+
+    [RequiresUnreferencedCode("")]
     public CheckoutViewModel(ICartService cartService, INavigator navigator)
     {
         _cartService = cartService;
@@ -26,7 +43,15 @@ public partial class CheckoutViewModel : ObservableObject
     {
         try
         {
-            // 1. Lấy dữ liệu từ SQLite
+            ValidateAllProperties(); // Ra lệnh kiểm tra toàn bộ các trường
+
+            if (HasErrors) // Nếu có bất kỳ lỗi nào
+            {
+                ErrorMessage = GetErrors().First().ErrorMessage;
+                return;
+            }
+            ErrorMessage = "";
+
             var cartItems = await _cartService.GetCartItemsAsync();
             if (cartItems.Count == 0) return;
 
