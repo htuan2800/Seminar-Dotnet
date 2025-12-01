@@ -36,7 +36,7 @@
                    TextWrapping="Wrap" />
 
                 <StackPanel Orientation="Horizontal" Spacing="5">
-                    <TextBlock Text="{Binding Product.price}" 
+                    <TextBlock Text="{Binding Product.price, Converter={StaticResource CurrencyConverter}}" 
                        FontSize="22" 
                        Foreground="Red" 
                        FontWeight="Bold"/>
@@ -97,7 +97,7 @@
 
                     <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,10,0,0">
                         <TextBlock Text="Tạm tính:" FontWeight="SemiBold" FontSize="16"/>
-                        <TextBlock Text="{Binding TotalPrice}" 
+                        <TextBlock Text="{Binding TotalPrice, Converter={StaticResource CurrencyConverter}}" 
                        FontSize="20" 
                        Foreground="Red" 
                        FontWeight="Bold"/>

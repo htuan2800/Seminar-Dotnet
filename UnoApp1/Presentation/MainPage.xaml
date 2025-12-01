@@ -15,10 +15,11 @@
 
         <utu:NavigationBar Content="{Binding Title}" Grid.Row="0">
             <utu:NavigationBar.PrimaryCommands>
-                <AppBarButton Label="Giỏ hàng" 
-                  Command="{Binding GoToCartCommand}">
+                <AppBarButton Label="Giỏ hàng" Command="{Binding GoToCartCommand}">
                     <Grid>
-                        <SymbolIcon Symbol="Shop" />
+                        <Viewbox Height="28" Width="28" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <SymbolIcon Symbol="Shop" />
+                        </Viewbox>
 
                         <Border Background="Red" 
                 CornerRadius="10" 
@@ -27,12 +28,7 @@
                 Margin="10,0,0,10"
                 MinWidth="16" Height="16"
                 Visibility="{Binding CartCount, Converter={StaticResource CountToVisibilityConverter}}">
-
-                            <TextBlock Text="{Binding CartCount}" 
-                       Foreground="White" 
-                       FontSize="10" 
-                       HorizontalAlignment="Center" 
-                       VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding CartCount}" Foreground="White" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </Grid>
                 </AppBarButton>
@@ -85,7 +81,7 @@
                                FontWeight="Bold" 
                                FontSize="16"
                                Margin="10,0,10,15">
-                                    <Run Text="{Binding price}" />
+                                    <Run Text="{Binding price, Converter={StaticResource CurrencyConverter}}" />
                                     <Run Text=" đ" FontSize="12"/>      
                             </TextBlock>
                         </Grid>

@@ -25,6 +25,7 @@
 
             <!-- Add resources here -->
             <converters:CountToVisibilityConverter x:Key="CountToVisibilityConverter" />
+            <converters:CurrencyConverter x:Key="CurrencyConverter" />
         </ResourceDictionary>
     </Application.Resources>
 

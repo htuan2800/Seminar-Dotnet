@@ -36,7 +36,7 @@
                         <StackPanel Grid.Column="1" Margin="10,0" VerticalAlignment="Center">
                             <TextBlock Text="{Binding ProductName}" FontWeight="Bold" TextWrapping="Wrap"/>
                             <TextBlock Foreground="Red">
-                                <Run Text="{Binding UnitPrice}" />
+                                <Run Text="{Binding UnitPrice, Converter={StaticResource CurrencyConverter}}" />
                                 <Run Text=" đ" />
                             </TextBlock>
 
@@ -73,7 +73,7 @@
             <StackPanel Padding="20,20,20,40">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="Tổng cộng: " FontWeight="Bold" FontSize="18"/>
-                    <TextBlock Text="{Binding TotalPrice}" FontWeight="Bold" FontSize="18" Foreground="Red"/>
+                    <TextBlock Text="{Binding TotalPrice, Converter={StaticResource CurrencyConverter}}" FontWeight="Bold" FontSize="18" Foreground="Red"/>
                     <TextBlock Text=" đ" FontSize="18" Foreground="Red"/>
                 </StackPanel>
 
