@@ -16,7 +16,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
+
         <utu:NavigationBar Content="CheckOut" Grid.Row="0" />
         <StackPanel Grid.Row="1" Padding="10" Spacing="15">
             <TextBlock Text="Thông tin giao hàng" FontSize="20" FontWeight="Bold"/>

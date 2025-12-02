@@ -35,6 +35,6 @@
     "UnoApp1 (WinAppSDK Packaged)": {
       "commandName": "MsixPackage",
       "compatibleTargetFramework": "windows"
-    },
+    }
   }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using Refit;
 using UnoApp1.Services;
 namespace UnoApp1.Presentation;
+using Microsoft.UI.Xaml.Controls;
 public partial class CheckoutViewModel : ObservableValidator
 {
     private readonly ICartService _cartService;
@@ -69,12 +70,21 @@ public partial class CheckoutViewModel : ObservableValidator
 
             // 3. Gọi API POST (Bước 3.5)
             var apiClient = RestService.For<IApiProduct>("https://69214bcc512fb4140bdfd567.mockapi.io/api/v1");
-
-             await apiClient.CreateOrderAsync(order);
-
+            await apiClient.CreateOrderAsync(order);
             System.Diagnostics.Debug.WriteLine("Gửi đơn hàng thành công: " + CustomerName);
-
             await _cartService.ClearCartAsync();
+
+
+            ContentDialog dialog = new ContentDialog();
+            dialog.Title = "Thông báo";
+            dialog.Content = "Chúc mừng! Bạn đã đặt hàng thành công.";
+            dialog.CloseButtonText = "Về trang chủ";
+            var mainWindow = App.MainWindow;
+            if (mainWindow != null && mainWindow.Content is FrameworkElement rootElement)
+            {
+                dialog.XamlRoot = rootElement.XamlRoot;
+            }
+            await dialog.ShowAsync();
 
             Console.WriteLine("Đặt hàng thành công!");
             // Điều hướng về trang Main (xóa history để không back lại được)
