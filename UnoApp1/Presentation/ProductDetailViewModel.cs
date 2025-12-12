@@ -30,13 +30,13 @@ public partial class ProductDetailViewModel : ObservableObject
 
         if (TempProductPayload != null)
         {
-            Console.WriteLine($"✅ Dữ liệu từ static: {TempProductPayload.product_name}");
+            Console.WriteLine($"Dữ liệu từ static: {TempProductPayload.product_name}");
             Product = TempProductPayload;
             TempProductPayload = null; // Xóa sau khi dùng
         }
         else
         {
-            Console.WriteLine("❌ TempProductPayload là null");
+            Console.WriteLine("TempProductPayload là null");
         }
     }
 
@@ -60,7 +60,6 @@ public partial class ProductDetailViewModel : ObservableObject
         OnPropertyChanged(nameof(TotalPrice));
     }
 
-    // ⭐ SỬA LẠI AddToCart - THÊM NHIỀU LẦN THEO QUANTITY
     [RelayCommand]
     private async Task AddToCartAsync()
     {
@@ -73,5 +72,16 @@ public partial class ProductDetailViewModel : ObservableObject
 
         // Reset về 1 sau khi thêm
         Quantity = 1;
+
+        ContentDialog dialog = new ContentDialog();
+        dialog.Title = "Thông báo";
+        dialog.Content = "Chúc mừng! Bạn đã thêm sản phẩm vào giỏ hàng thành công.";
+        dialog.CloseButtonText = "Đóng";
+        var mainWindow = App.MainWindow;
+        if (mainWindow != null && mainWindow.Content is FrameworkElement rootElement)
+        {
+            dialog.XamlRoot = rootElement.XamlRoot;
+        }
+        await dialog.ShowAsync();
     }
 }
