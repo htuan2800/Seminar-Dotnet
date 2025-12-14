@@ -73,7 +73,7 @@ public class CartService : ICartService
             // Cập nhật số lượng mới
             existingItem.Quantity = item.Quantity;
 
-            // Nếu số lượng <= 0 thì xóa luôn (tuỳ logic của bạn, ở đây mình giữ lại để ViewModel xử lý)
+            // Nếu số lượng <= 0 thì xóa luôn
             if (existingItem.Quantity <= 0)
             {
                 db.CartItems.Remove(existingItem);

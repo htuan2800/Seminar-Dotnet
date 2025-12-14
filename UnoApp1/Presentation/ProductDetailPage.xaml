@@ -114,7 +114,8 @@
 
                 <TextBlock Text="Ngày tạo:" FontWeight="SemiBold" Margin="0,10,0,0" />
                 <TextBlock Text="{Binding Product.created_at}" Opacity="0.8" />
-
+                <TextBlock Text="Barcode:" FontWeight="SemiBold" Margin="0,10,0,0" />
+                <TextBlock Text="{Binding Product.barcode}" Opacity="0.8" />
             </StackPanel>
         </ScrollViewer>
 
