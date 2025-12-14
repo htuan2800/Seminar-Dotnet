@@ -13,7 +13,7 @@ public partial class MainViewModel : ObservableObject
 
     private ICartService _cartService;
 
-    // 1. Khai báo biến IsLoading (Bạn bị thiếu cái này)
+    //Khai báo biến IsLoading
     [ObservableProperty]
     private bool _isLoading;
 
@@ -32,8 +32,6 @@ public partial class MainViewModel : ObservableObject
 
         Products = new ObservableCollection<Product>();
 
-        // 3. Gọi hàm tải dữ liệu (Fire-and-forget)
-        // Vì Constructor không thể await, ta gọi hàm async mà không cần await ở đây
         LoadDataAsync();
         _cartService = cartService;
 
@@ -65,7 +63,7 @@ public partial class MainViewModel : ObservableObject
             // Gọi API
             var listFromApi = await apiClient.GetProductsAsync();
 
-            Console.WriteLine($"👉 KẾT QUẢ API: Tìm thấy {listFromApi.Count} sản phẩm");
+            Console.WriteLine($"KẾT QUẢ API: Tìm thấy {listFromApi.Count} sản phẩm");
 
             //Chuyển về luồng UI để vẽ lên màn hình
             _dispatcher.TryEnqueue(() =>
@@ -76,7 +74,6 @@ public partial class MainViewModel : ObservableObject
                     Products.Add(item);
                 }
 
-                // Tắt loading cũng nên để trong này cho chắc (vì nó ảnh hưởng UI)
                 IsLoading = false;
             });
         }

@@ -21,7 +21,6 @@ public partial class ProductDetailViewModel : ObservableObject
 
     public decimal TotalPrice => Product != null ? Product.price * Quantity : 0;
 
-    // Thêm constructor nhận Product từ navigation
     public ProductDetailViewModel(ICartService cartService, Product? product = null)
     {
         _cartService = cartService;

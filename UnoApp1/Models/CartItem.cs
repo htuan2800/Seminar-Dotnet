@@ -18,11 +18,11 @@ namespace UnoApp1.Models
         public decimal UnitPrice { get; set; }
 
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(TotalPrice))]
+        [NotifyPropertyChangedFor(nameof(SubTotal))]
         private int _quantity;
 
         // Thuộc tính này chỉ để hiển thị, không lưu vào DB
         [NotMapped]
-        public decimal TotalPrice => UnitPrice * Quantity;
+        public decimal SubTotal => UnitPrice * Quantity;
     }
 }
